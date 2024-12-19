@@ -13,24 +13,24 @@ cloudinary.v2.config({
     api_secret: process.env.CLOUDINARY_API_SECRET,
 })
 
-if(cluster.isPrimary){
-    console.log(`primary ${process.pid} is running`)
-    for(let i=0;i<numcpu;i++){
-        cluster.fork();
-    }
-}
-else{
-    app.get('/' , (req,res) => {
-        return res.json({
-            message: `server is running on process id ${process.pid}`
-        })
-    })
+// if(cluster.isPrimary){
+//     console.log(`primary ${process.pid} is running`)
+//     for(let i=0;i<numcpu;i++){
+//         cluster.fork();
+//     }
+// }
+// else{
+//     app.get('/' , (req,res) => {
+//         return res.json({
+//             message: `server is running on process id ${process.pid}`
+//         })
+//     })
 
     app.listen((process.env.PORT) , () => {
         console.log(`server is running on ${process.env.PORT}`)
     })
 
-    console.log(`worker ${process.pid} started`)
-}
+//     console.log(`worker ${process.pid} started`)
+// }
 
 
